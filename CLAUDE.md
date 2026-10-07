@@ -20,4 +20,5 @@ Non-obvious points:
 - Pause/game-over stop the loop with `cancelAnimationFrame(animId)`; unpausing restarts it manually via `loop(performance.now())`, and `init()` cancels any existing frame before starting a new one.
 - Rotation (`tryRotate`) is a simple CW rotation with horizontal kicks `[0, -1, 1, -2, 2]` — not SRS.
 - Score: `LINE_SCORES[cleared] * level`; soft drop +1/row, hard drop +2/row. Fall interval is `max(100, 1000 - (level-1)*90)` ms.
+- Records: `init()` también se ejecuta al cargar (para pintar el tablero) pero el loop se cancela y `started=false` hasta pulsar "Jugar" (`#start-overlay`). El top 5 vive en `localStorage['tetrisRecords']` y `{bestCombo, maxLines}` en `localStorage['tetrisStats']`; `combo` se actualiza en `clearLines()` y las stats se guardan ahí y en `endGame()`. El keydown ignora eventos cuyo `e.target` es un `INPUT`.
 - Canvas size is hard-coded in `index.html` (`300×600`, next preview `120×120`) and must equal `COLS*BLOCK × ROWS*BLOCK` if those constants change in `game.js`.
