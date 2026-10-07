@@ -16,6 +16,8 @@
   --danger: #e57373;
   --btn-text: #0f0f17;
   --grid: #22222e;
+  --menu-btn-bg: #22223a;
+  --menu-btn-hover: #2e2e4a;
 }
 
 :root[data-theme="light"] {
@@ -36,6 +38,8 @@
   --danger: #d32f2f;
   --btn-text: #ffffff;
   --grid: #e3e6ee;
+  --menu-btn-bg: #e8ebf3;
+  --menu-btn-hover: #d8ddec;
 }
 
 *, *::before, *::after {
@@ -247,3 +251,83 @@ kbd {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+
+/* ---- Menú de pausa ---- */
+.overlay:not(.is-pause) .pause-menu { display: none; }
+.overlay.is-pause #restart-btn { display: none; }
+.overlay.is-pause #overlay-score { display: none; }
+
+.pause-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 220px;
+}
+
+.menu-btn, .step-btn {
+  background: var(--menu-btn-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.menu-btn { padding: 10px 16px; }
+.step-btn { width: 30px; height: 30px; }
+
+.menu-btn:hover, .step-btn:hover { background: var(--menu-btn-hover); }
+
+.menu-btn:focus-visible, .step-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+#resume-btn {
+  background: var(--accent);
+  color: var(--btn-text);
+  border-color: var(--accent);
+}
+
+#resume-btn:hover { background: var(--accent-hover); }
+
+.pause-controls {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 4px 8px;
+}
+
+.pause-controls[hidden] { display: none; }
+
+.pause-controls li {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.level-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.level-row-label { flex: 1; text-align: left; color: var(--text); }
+
+.level-row-value {
+  min-width: 24px;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.menu-hint { font-size: 11px; color: var(--muted); }

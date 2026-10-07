@@ -20,4 +20,5 @@ Non-obvious points:
 - Pause/game-over stop the loop with `cancelAnimationFrame(animId)`; unpausing restarts it manually via `loop(performance.now())`, and `init()` cancels any existing frame before starting a new one.
 - Rotation (`tryRotate`) is a simple CW rotation with horizontal kicks `[0, -1, 1, -2, 2]` — not SRS.
 - Score: `LINE_SCORES[cleared] * level`; soft drop +1/row, hard drop +2/row. Fall interval is `max(100, 1000 - (level-1)*90)` ms.
+- Pause is a menu inside `#overlay` (class `is-pause` shows `#pause-menu`; game over keeps the plain overlay). While `paused`, the keydown handler only runs `handleMenuKey` (menu navigation). `heldKeys`/`blockedKeys` discard keys still held when resuming/restarting until their `keyup`. `startLevel` (localStorage `startLevel`, 1–10) is copied to `baseLevel` in `init()` (so edits while paused only affect the next game); `level` starts at `baseLevel` and `clearLines()` uses `max(baseLevel, floor(lines/10)+1)`.
 - Canvas size is hard-coded in `index.html` (`300×600`, next preview `120×120`) and must equal `COLS*BLOCK × ROWS*BLOCK` if those constants change in `game.js`.

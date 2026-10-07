@@ -55,6 +55,25 @@
         <p id="overlay-title">GAME OVER</p>
         <p id="overlay-score"></p>
         <button id="restart-btn">Reiniciar</button>
+        <div id="pause-menu" class="pause-menu" role="menu" aria-label="Menú de pausa">
+          <button type="button" id="resume-btn" class="menu-btn" role="menuitem">Reanudar</button>
+          <button type="button" id="menu-restart-btn" class="menu-btn" role="menuitem">Reiniciar</button>
+          <button type="button" id="controls-btn" class="menu-btn" role="menuitem" aria-expanded="false" aria-controls="pause-controls">Ver controles</button>
+          <ul id="pause-controls" class="pause-controls" hidden>
+            <li><kbd>←</kbd><kbd>→</kbd> mover</li>
+            <li><kbd>↑</kbd> o <kbd>X</kbd> rotar</li>
+            <li><kbd>↓</kbd> bajar</li>
+            <li><kbd>Space</kbd> caída</li>
+            <li><kbd>P</kbd> o <kbd>Esc</kbd> pausa</li>
+          </ul>
+          <div class="level-row">
+            <span class="level-row-label">Nivel inicial</span>
+            <button type="button" id="level-dec" class="step-btn" aria-label="Bajar nivel inicial">−</button>
+            <span id="start-level-value" class="level-row-value" aria-live="polite">1</span>
+            <button type="button" id="level-inc" class="step-btn" aria-label="Subir nivel inicial">+</button>
+          </div>
+          <p class="menu-hint">Se aplica en la próxima partida</p>
+        </div>
       </div>
     </div>
   </div>
