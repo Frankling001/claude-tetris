@@ -18,6 +18,7 @@ Non-obvious points:
 - Board cells hold `0` or a piece type index 1–8 (8 = the 3×3 "nut" challenge piece, whose center hole is drawn by `drawNutHole` only while the piece is moving); the same index selects the entry in `COLORS` and `PIECES` (index 0 is `null` in both). Piece matrices embed their own type index as the filled value.
 - Two paths lock a piece: the `loop` gravity tick and `softDrop`/`hardDrop`. All go through `lockPiece()` → `merge()` → `clearLines()` → `spawn()`. Game over is triggered inside `spawn()` when the new piece collides.
 - Pause/game-over stop the loop with `cancelAnimationFrame(animId)`; unpausing restarts it manually via `loop(performance.now())`, and `init()` cancels any existing frame before starting a new one.
+- Skins: `SKINS` (retro/neon/pastel/pixel) define `colors`, `background`, `grid`, `drawBlock`, `drawNutHole`; `COLORS` is a `let` reassigned to the active skin's palette by `applySkin()` (pref in `localStorage.skin`). `drawBlock`/`drawNutHole`/`drawGrid`/`drawBackground` dispatch to `currentSkin`; neon resets `shadowBlur` after each block. Changing skin while paused needs a manual `draw(); drawNext();`.
 - Rotation (`tryRotate`) is a simple CW rotation with horizontal kicks `[0, -1, 1, -2, 2]` — not SRS.
 - Score: `LINE_SCORES[cleared] * level`; soft drop +1/row, hard drop +2/row. Fall interval is `max(100, 1000 - (level-1)*90)` ms.
 - Canvas size is hard-coded in `index.html` (`300×600`, next preview `120×120`) and must equal `COLS*BLOCK × ROWS*BLOCK` if those constants change in `game.js`.
