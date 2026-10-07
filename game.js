@@ -315,6 +315,12 @@ function init() {
   overlay.classList.add('hidden');
   combo = 0;
   pendingRecord = false;
+  // limpia los restos de la pantalla de game over (el overlay se reutiliza en la pausa)
+  recordForm.classList.add('hidden');
+  newRecordMsg.classList.add('hidden');
+  recordsOverEl.textContent = '';
+  statsOverEl.textContent = '';
+  nameInput.blur();
   cancelAnimationFrame(animId);
   animId = requestAnimationFrame(loop);
 }
