@@ -15,7 +15,7 @@ Open `index.html` directly, or serve statically (e.g. `python -m http.server 800
 All logic lives in `game.js`, a single script using module-level mutable globals (`board`, `current`, `next`, `score`, `lines`, `level`, `paused`, `gameOver`, `dropInterval`, `animId`, …) declared once and reset in `init()`. It binds directly to DOM ids defined in `index.html` (`board`, `next-canvas`, `score`, `lines`, `level`, `overlay`, `overlay-title`, `overlay-score`, `restart-btn`), so renaming an id in the HTML requires updating the lookups at the top of `game.js`.
 
 Non-obvious points:
-- Board cells hold `0` or a piece type index 1–7; the same index selects the entry in `COLORS` and `PIECES` (index 0 is `null` in both). Piece matrices embed their own type index as the filled value.
+- Board cells hold `0` or a piece type index 1–8 (8 = the 3×3 "nut" challenge piece, whose center hole is drawn by `drawNutHole` only while the piece is moving); the same index selects the entry in `COLORS` and `PIECES` (index 0 is `null` in both). Piece matrices embed their own type index as the filled value.
 - Two paths lock a piece: the `loop` gravity tick and `softDrop`/`hardDrop`. All go through `lockPiece()` → `merge()` → `clearLines()` → `spawn()`. Game over is triggered inside `spawn()` when the new piece collides.
 - Pause/game-over stop the loop with `cancelAnimationFrame(animId)`; unpausing restarts it manually via `loop(performance.now())`, and `init()` cancels any existing frame before starting a new one.
 - Rotation (`tryRotate`) is a simple CW rotation with horizontal kicks `[0, -1, 1, -2, 2]` — not SRS.
